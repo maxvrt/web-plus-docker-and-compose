@@ -18,10 +18,10 @@ import { JwtModule } from '@nestjs/jwt';
     TypeOrmModule.forRoot({
       // параметр конфига
       type: 'postgres',
-      host: 'localhost',
+      host: 'db',
       port: 5432,
-      username: 'student',
-      password: 'student',
+      username: 'postgres',
+      password: 'secretpassword',
       database: 'kupipodariday',
       entities: [User, Wish, Offer, Wishlist],
       synchronize: true,
