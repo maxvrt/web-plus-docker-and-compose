@@ -9,11 +9,13 @@ RUN npm run build
 FROM node:16-alpine as production
 WORKDIR /app
 COPY --from=builder /app/package*.json ./
-RUN npm i --omit=dev
+RUN npm i --omit=dev && npm install -g pm2
 COPY --from=builder /app/dist ./dist/
 COPY --from=builder /app/.env ./.env
+COPY --from=builder /app/ecosystem.config.js ./ecosystem.config.js
 EXPOSE 3000
-CMD ["node", "dist/src/main.js"]
+CMD ["pm2-runtime", "start", "ecosystem.config.js"]
+# CMD ["node", "dist/src/main.js"]
 
 # Команды локального запуска
 # docker run --name postgres-db --network my-network --network-alias db -e POSTGRES_PASSWORD=secretpassword -e POSTGRES_DB=kupipodariday -d postgres
