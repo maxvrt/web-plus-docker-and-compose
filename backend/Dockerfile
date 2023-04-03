@@ -11,6 +11,7 @@ WORKDIR /app
 COPY --from=builder /app/package*.json ./
 RUN npm i --omit=dev
 COPY --from=builder /app/dist ./dist/
+COPY --from=builder /app/.env ./.env
 EXPOSE 3000
 CMD ["node", "dist/src/main.js"]
 
