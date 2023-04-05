@@ -18,8 +18,6 @@ services:
     image: postgres:12.12-alpine
     restart: always
     env_file: .env
-    volumes:
-      - "pg-data:/var/lib/postgresql/data/pgdata"
 
   frontend:
     container_name: 'k-frontend'
@@ -28,3 +26,5 @@ services:
       dockerfile: Dockerfile
     ports:
       - '8080:80'
+volumes:
+  pg-data:
