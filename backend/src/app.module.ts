@@ -11,26 +11,24 @@ import { WishlistsModule } from './wishlists/wishlists.module';
 import { OffersModule } from './offers/offers.module';
 import { AuthModule } from './auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
-      // параметр конфига
       type: 'postgres',
-      host: 'localhost',
+      host: process.env.POSTGRES_HOST,
       port: 5432,
-      username: 'student',
-      password: 'student',
-      database: 'kupipodariday',
+      username: process.env.POSTGRES_USER,
+      password: process.env.POSTGRES_PASSWORD,
+      database: process.env.POSTGRES_DB,
       entities: [User, Wish, Offer, Wishlist],
       synchronize: true,
     }),
     PassportModule,
-    JwtModule.register({
-      secret: '4sdN9LQUhARIEHKl',
-      signOptions: { expiresIn: '3h' },
-    }),
     UsersModule,
     WishesModule,
     WishlistsModule,

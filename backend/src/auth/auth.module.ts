@@ -9,6 +9,7 @@ import { JwtStrategy } from './jwt.strategy';
 import { LocalStrategy } from './local.strategy';
 import { UsersService } from '../users/users.service';
 import { UsersModule } from '../users/users.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Global()
 @Module({
@@ -16,9 +17,13 @@ import { UsersModule } from '../users/users.module';
     UsersModule,
     TypeOrmModule.forFeature([User]),
     PassportModule,
-    JwtModule.register({
-      secret: '4sdN9LQUhARIEHKl',
-      signOptions: { expiresIn: '3h' },
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'),
+        signOptions: { expiresIn: '3d' },
+      }),
+      inject: [ConfigService],
     }),
   ],
   exports: [AuthService],
