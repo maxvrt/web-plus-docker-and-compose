@@ -9,5 +9,5 @@ FROM nginx:latest AS nginx
 # тут нет WORKDIR так как будет браться корень системы
 COPY --from=builder /app/build ./usr/share/nginx/html
 COPY /nginx/conf.d/default.conf /etc/nginx/conf.d
-EXPOSE 81
+EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]
