@@ -22,16 +22,16 @@
 
 ## Докеризация фронтенда
 В репозитории проекта есть директория frontend, создана поддиректория nginx/conf.d с файлом default.conf со следующим содержимым:
-```JSON
+```nginx
 server {
-listen       80;
-server_name  localhost;
-location / {
-root   /usr/share/nginx/html;
-index  index.html index.htm;
-	# Исправляем роутинг на фронтенде
-try_files $uri $uri/ /index.html;
-}
+	listen 80;
+	server_name localhost;
+	location / {
+		root /usr/share/nginx/html;
+		index index.html index.htm;
+		# Исправляем роутинг на фронтенде
+		try_files $uri $uri/ /index.html;
+	}
 } 
 ```
 В Dockerfile описана сборка фронтенда в два этапа: для первого потребуется базовый образ node:16-alpine, а для второго — nginx:1.23.1-alpine. На втором этапе скопирован билд фронтенда в образ с nginx, а также конфиг. Конфиг будет по пути /etc/nginx/conf.d внутри контейнера.
