@@ -1,9 +1,7 @@
 # Докеризация приложения
 
-Перед тем как приступить к выполнению проектной работы разместите в репозитории исходный код фронтенд и бэкенд частей сервиса КупиПодариДай, реализованного вами ранее.
+В этой проектной работе нужно было докеризировать сервис вишлистов, который состоял из трех частей: бэкенд-сервиса на Node.js, БД (PostrgreSQL) и фронтенда на React (раздаётся nginx), а затем развернуть его в Яндекс Облаке.
 
-IP адрес 158.160.24.251
+==
 
-Frontend https://smaksimdocker.nomoredomains.monster
-
-Backend https://api.smaksimdocker.nomoredomains.monster
+(старые данные: IP адрес 158.160.24.251; Frontend https://smaksimdocker.nomoredomains.monster; Backend https://api.smaksimdocker.nomoredomains.monster)
